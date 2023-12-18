@@ -1,0 +1,47 @@
+<h1>Loan Management</h1>
+
+<div>
+    <h3>Add Loan</h3>
+    <form (submit)="addLoan()">
+        <input type="text" name="customerName" placeholder="Customer Name" [(ngModel)]="newLoan.customerName">
+        <input type="number" name="amount" placeholder="Loan Amount" [(ngModel)]="newLoan.amount">
+        <input type="number" name="interestRate" placeholder="Interest Rate" [(ngModel)]="newLoan.interestRate">
+        <input type="number" name="durationMonths" placeholder="Duration in Months"
+            [(ngModel)]="newLoan.durationMonths">
+        <button type="submit">Add Loan</button>
+    </form>
+</div>
+
+<div>
+    <h3>Search Loans</h3>
+    <input type="text" placeholder="Search Loans" [(ngModel)]="searchKeyword">
+</div>
+
+<div>
+    <h3>List of Loans</h3>
+    <ul>
+        <li *ngFor="let loan of filteredLoans">
+            <div>
+                <h4>Customer: {{ loan.customerName }}</h4>
+                <p>Loan Amount: {{ loan.amount }}</p>
+                <p>Interest Rate: {{ loan.interestRate }}</p>
+                <p>Duration (Months): {{ loan.durationMonths }}</p>
+                <button (click)="editLoan(loan)">Edit</button>
+                <button (click)="deleteLoan(loan)">Delete</button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="isEditing">
+    <h3>Edit Loan</h3>
+    <form (submit)="saveEditedLoan()">
+        <input type="text" name="customerName" placeholder="Customer Name" [(ngModel)]="editedLoan.customerName">
+        <input type="number" name="amount" placeholder="Loan Amount" [(ngModel)]="editedLoan.amount">
+        <input type="number" name="interestRate" placeholder="Interest Rate" [(ngModel)]="editedLoan.interestRate">
+        <input type="number" name="durationMonths" placeholder="Duration in Months"
+            [(ngModel)]="editedLoan.durationMonths">
+        <button type="submit">Save</button>
+        <button type="button" (click)="cancelEdit()">Cancel</button>
+    </form>
+</div>
